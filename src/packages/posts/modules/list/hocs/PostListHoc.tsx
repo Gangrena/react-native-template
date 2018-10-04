@@ -1,11 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { fetch } from '../actions'
+import { fetchPostsContent } from '../actions'
 import { IPost } from '../../../types/Post'
 
+// tests
+import { updateIntl } from '../../../../../app/features/intl/actions'
+
 interface IProps {
-  fetch: () => void
+  fetchPostsContent: () => void
+  updateIntl: (cos: any) => void
 }
 
 export default (WrappedComponent: any) => {
@@ -19,12 +23,13 @@ export default (WrappedComponent: any) => {
   })
 
   const mapDispatchToProps = (dispatch: Dispatch) =>
-    bindActionCreators({ fetch }, dispatch)
+    bindActionCreators({ fetchPostsContent, updateIntl }, dispatch)
 
   class PostListHoc extends React.Component<IProps> {
     constructor(props: IProps) {
       super(props)
-      this.props.fetch()
+      this.props.fetchPostsContent()
+      this.props.updateIntl({ locale: 'pl' })
     }
 
     public render() {

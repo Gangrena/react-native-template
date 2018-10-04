@@ -1,10 +1,15 @@
-import { action } from 'typesafe-actions'
+import { Dispatch } from 'redux'
 
-import { FETCH_ERROR, FETCH_SUCCESS, FETCH_STARTED } from './actionTypes'
-import { IPost } from '../../types/Post'
+import createActionType from '../../../../app/lib/createActionType'
+import { NAME } from './constants'
+import { ApiService } from '../../../../app/services/Data'
 
-export const fetch = () => action(FETCH_STARTED)
+export const POSTS_FETCH_CONTENT = createActionType(NAME, 'fetch content')
 
-export const fetchSuccess = (data: IPost) => action(FETCH_SUCCESS, data)
-
-export const fetchFailed = (error: any) => action(FETCH_ERROR, error)
+export const fetchPostsContent = () => (dispatch: Dispatch) => {
+  dispatch(
+    ApiService.get(POSTS_FETCH_CONTENT, {
+      url: '/posts',
+    })
+  )
+}

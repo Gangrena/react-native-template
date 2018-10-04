@@ -1,18 +1,17 @@
-import { ActionType } from 'typesafe-actions'
+import { persistReducer } from 'redux-persist'
+import { AsyncStorage } from 'react-native'
 
-import asyncReducerFactory from '../../../../app/lib/asyncReducerFactory'
-import {
-  createState,
-  createWrappedState,
-} from '../../../../app/lib/stateFactory'
+import { reducerFactory } from '../../../../app/lib/reducerFactory'
+import { POSTS_FETCH_CONTENT } from './actions'
 
-import handleReduxAction from '../../../../app/lib/handleReduxAction'
-import * as actionsTypes from './actions'
-import { FETCH_SUCCESS, FETCH_STARTED, FETCH_ERROR } from './actionTypes'
-import { IPost } from '../../types/Post'
+const config = {
+  key: 'test2',
+  storage: AsyncStorage,
+}
 
-export default asyncReducerFactory(
-  'posts',
-  'FETCH',
-  createWrappedState([], { dupa: 'dupa', asf: 'asf' })
+export default persistReducer(
+  config,
+  reducerFactory({
+    baseActionName: POSTS_FETCH_CONTENT,
+  })
 )

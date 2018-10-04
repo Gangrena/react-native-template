@@ -8,7 +8,7 @@ const actionTypes = {
   ERROR: 'error',
 }
 
-const wrapReduxActions = (module: string, type: string, reductors: any) => ({
+const wrapReduxHandlers = (module: string, type: string, handlers: any) => ({
   [createActionType(module, `${type} ${actionTypes.STARTED}`)]: (
     state: any
   ) => ({
@@ -33,17 +33,17 @@ const wrapReduxActions = (module: string, type: string, reductors: any) => ({
     isLoading: false,
     error: payload,
   }),
-  ...reductors,
+  ...handlers,
 })
 
 export default <S>(
   domainName: string,
   type: string,
   stateFields: S,
-  reductors: any = {}
+  handlers: any = {}
 ) => (state: S = stateFields, action: any) =>
   handleReduxAction(
-    wrapReduxActions(domainName, type, reductors),
+    wrapReduxHandlers(domainName, type, handlers),
     state,
     action
   )

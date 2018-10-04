@@ -1,11 +1,9 @@
-import PostAddScene from './scenes/PostAddScene'
 import reducer from './reducer'
+import Provider from './provider'
 import { NAME } from './constants'
 
 export default {
-  scenes: {
-    PostAddScene,
-  },
+  Provider,
   reducer,
   constants: {
     NAME,

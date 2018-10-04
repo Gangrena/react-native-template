@@ -1,5 +1,5 @@
-import Layout from './containers/Layout'
+import App from './containers/App'
 
 export default {
-  components: { Layout },
+  components: { App },
 }

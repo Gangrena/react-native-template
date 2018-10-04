@@ -1,9 +1,7 @@
-import handleReduxAction from '../../app/lib/handleReduxAction'
 import { ActionConst } from 'react-native-router-flux'
 
-export interface IRoutesState {
-  scene: string
-}
+import handleReduxAction from '../../lib/handleReduxAction'
+import { IRoutesState } from './types'
 
 const actions = {
   [ActionConst.FOCUS]: (state: IRoutesState, action: any) => ({

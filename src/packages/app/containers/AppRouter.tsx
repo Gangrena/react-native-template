@@ -5,20 +5,17 @@ import { Dispatch } from 'redux'
 
 interface IProps {
   dispatch: Dispatch
+  children: React.ReactChildren
 }
 
-class AppRouter extends Component<IProps, any> {
-  private reducerCreate = (params: any) => {
-    return (state: any, action: any) => {
-      this.props.dispatch(action)
-      return new Reducer(params)(state, action)
-    }
+class AppRouter extends Component<any, IProps> {
+  private reducerCreate = (params: any) => (state: any, action: any) => {
+    this.props.dispatch(action)
+    return new Reducer(params)(state, action)
   }
 
   public render() {
-    return (
-      <Router createReducer={this.reducerCreate}>{this.props.children}</Router>
-    )
+    return <Router createReducer={this.reducerCreate} {...this.props} />
   }
 }
 

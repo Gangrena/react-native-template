@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { FormattedMessage } from 'react-intl'
 import { Actions } from 'react-native-router-flux'
-import LG from 'react-native-linear-gradient'
 
 import { colors } from '../../../styles/common'
 
@@ -20,16 +20,21 @@ interface IProps {
 }
 
 class DrawerContent extends React.Component<IProps> {
+  public renderButton = (title: string, action: () => void) => {
+    return (
+      <TouchableOpacity onPress={action}>
+        <FormattedMessage id={title} />
+      </TouchableOpacity>
+    )
+  }
   public render() {
     return (
-      <LG
-        colors={[colors.COLOR_JACARTA, colors.COLOR_SAN_MARINO]}
-        style={styles.container}
-      >
-        <Button title="home" onPress={() => Actions.popTo('home')} />
-        <Button title="counter" onPress={Actions.counter} />
-        <Button title="posts" onPress={Actions.postsRoot} />
-      </LG>
+      <View>
+        {this.renderButton('home', () => Actions.popTo('home'))}
+        {this.renderButton('counter', Actions.counter)}
+        {this.renderButton('posts', Actions.postsRoot)}
+        {this.renderButton('settings', Actions.settingsRoot)}
+      </View>
     )
   }
 }
